@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071226">
+  <meta name="description" content="Daryl A. Dajao — BS Information Technology graduate, IT support trainee, and aspiring IT professional.">
+  <title>Daryl A. Dajao | BSIT Portfolio</title>
+  <style>
+    :root {
+      --bg: #071226;
+      --bg-soft: #0b1b35;
+      --panel: rgba(13, 30, 58, .72);
+      --panel-solid: #0d1e3a;
+      --text: #f4f7ff;
+      --muted: #b7c5df;
+      --blue: #58a6ff;
+      --cyan: #48e0ff;
+      --gold: #ffc857;
+      --purple: #a78bfa;
+      --border: rgba(110, 164, 255, .25);
+      --shadow: 0 18px 55px rgba(0, 0, 0, .28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 105px; }
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 15%, rgba(36, 111, 219, .18), transparent 28rem),
+        radial-gradient(circle at 85% 45%, rgba(126, 87, 194, .13), transparent 26rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background-image: radial-gradient(rgba(148, 184, 255, .15) .7px, transparent .7px);
+      background-size: 26px 26px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    /* Floating glass navigation */
+    .site-header {
+      position: fixed; z-index: 1000; top: 16px; left: 0; right: 0;
+      padding-inline: 20px; transition: top .3s ease;
+    }
+    .nav-shell {
+      width: min(1240px, 100%); margin: auto; min-height: 76px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 12px 20px 12px 24px;
+      border: 1px solid rgba(105, 164, 255, .42);
+      border-radius: 22px;
+      background: rgba(5, 16, 37, .78);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 0 24px rgba(48, 126, 255, .13), inset 0 1px rgba(255,255,255,.07);
+      position: relative; overflow: hidden;
+    }
+    .nav-shell::before {
+      content: ""; position: absolute; inset: 0 auto 0 -40%;
+      width: 30%; transform: skewX(-24deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+      animation: navShimmer 8s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes navShimmer { 0%, 55% { left: -40%; } 80%, 100% { left: 130%; } }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; z-index: 1; }
+    .brand-mark {
+      width: 43px; height: 43px; display: grid; place-items: center;
+      border-radius: 14px; color: var(--gold); font-size: 23px; font-weight: 900;
+      border: 1px solid rgba(255, 200, 87, .55);
+      background: linear-gradient(145deg, rgba(255,200,87,.17), rgba(88,166,255,.08));
+      box-shadow: 0 0 18px rgba(255,200,87,.12);
+    }
+    .brand-name { font-size: 16px; font-weight: 800; letter-spacing: .2px; line-height: 1.25; }
+    .brand-sub { display: block; font-size: 9px; color: var(--muted); letter-spacing: 3px; margin-top: 4px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; z-index: 1; }
+    .nav-links a {
+      position: relative; display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 12px; border-radius: 12px; text-decoration: none;
+      color: #c6d3eb; font-size: 13px; font-weight: 650; transition: color .25s, background .25s, transform .25s;
+    }
+    .nav-links a .nav-icon { font-size: 15px; }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold); background: rgba(255, 200, 87, .08); transform: translateY(-1px);
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; height: 2px; bottom: 3px; left: 15px; right: 15px;
+      border-radius: 9px; background: var(--gold); transform: scaleX(0); transform-origin: center;
+      transition: transform .25s ease; box-shadow: 0 0 12px rgba(255,200,87,.7);
+    }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .menu-toggle {
+      display: none; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--border);
+      color: var(--text); background: rgba(255,255,255,.05); cursor: pointer; font-size: 22px;
+    }
+
+    /* Hero */
+    .hero { min-height: 100svh; display: flex; align-items: center; padding: 150px 0 90px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 55px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--cyan); font-size: 11px; font-weight: 800; margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+    h1 { font-size: clamp(42px, 6.3vw, 76px); line-height: 1.06; letter-spacing: -2.7px; margin-bottom: 16px; }
+    .gradient-name { background: linear-gradient(100deg, #fff 8%, var(--gold) 58%, #ff9f43); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero h2 { color: #dbe7ff; font-size: clamp(18px, 2vw, 23px); font-weight: 650; margin-bottom: 12px; }
+    .typed-line { color: var(--muted); font-size: 17px; min-height: 32px; margin-bottom: 19px; }
+    .typed-line span { color: var(--gold); font-weight: 700; }
+    .cursor { display: inline-block; color: var(--cyan); animation: blink .8s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-description { color: #b9c8e2; max-width: 620px; margin-bottom: 27px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 12px 19px; border-radius: 13px; text-decoration: none; font-weight: 800; font-size: 14px;
+      border: 1px solid transparent; transition: transform .25s, box-shadow .25s, background .25s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: linear-gradient(110deg, var(--gold), #ffad43); color: #101b31; box-shadow: 0 8px 26px rgba(255, 184, 68, .2); }
+    .btn-primary:hover { box-shadow: 0 12px 30px rgba(255,184,68,.35); }
+    .btn-outline { border-color: rgba(88,166,255,.75); background: rgba(88,166,255,.07); color: var(--text); }
+    .btn-outline:hover { background: rgba(88,166,255,.16); }
+    .quick-facts { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 32px; }
+    .fact { border-left: 2px solid var(--gold); padding-left: 12px; }
+    .fact strong { display: block; font-size: 19px; line-height: 1.3; }
+    .fact span { font-size: 11px; color: var(--muted); letter-spacing: .5px; }
+
+    .visual-wrap { min-height: 420px; display: grid; place-items: center; position: relative; }
+    .orbit {
+      width: min(350px, 76vw); aspect-ratio: 1; border-radius: 50%; position: relative; display: grid; place-items: center;
+      border: 1px solid rgba(88,166,255,.38);
+      background: radial-gradient(circle, rgba(34,94,177,.28), rgba(8,24,51,.4) 60%, transparent 70%);
+      box-shadow: 0 0 70px rgba(57,128,255,.15), inset 0 0 50px rgba(57,128,255,.1);
+      animation: float 6s ease-in-out infinite;
+    }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: -15px; border-radius: 50%; border: 1px solid rgba(72,224,255,.42); animation: spin 18s linear infinite; }
+    .orbit::after { inset: -31px; border-color: rgba(255,200,87,.38); border-style: dashed; animation-direction: reverse; animation-duration: 34s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .profile-placeholder {
+      width: 72%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; text-align: center;
+      border: 2px solid rgba(255,200,87,.75);
+      background: linear-gradient(145deg, rgba(30,72,133,.9), rgba(9,20,43,.95));
+      box-shadow: 0 0 45px rgba(88,166,255,.24), inset 0 0 35px rgba(88,166,255,.15);
+      padding: 20px;
+    }
+    .profile-placeholder .initials { font-size: clamp(58px, 7vw, 94px); line-height: 1; font-weight: 900; letter-spacing: -5px; color: var(--gold); }
+    .profile-placeholder small { display: block; margin-top: 12px; font-size: 11px; color: #dbe7ff; letter-spacing: 2px; }
+    .floating-chip {
+      position: absolute; padding: 11px 14px; border: 1px solid var(--border); border-radius: 13px;
+      background: rgba(7,18,38,.88); backdrop-filter: blur(10px); box-shadow: var(--shadow);
+      font-size: 12px; font-weight: 750; color: #dce8ff; animation: float 5s ease-in-out infinite;
+    }
+    .floating-chip b { color: var(--gold); margin-right: 5px; }
+    .chip-one { top: 12%; right: -1%; }
+    .chip-two { bottom: 15%; left: -2%; animation-delay: -2s; }
+    .scroll-hint { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: #8097bd; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+    .scroll-hint span { display: block; text-align: center; font-size: 18px; color: var(--gold); animation: nudge 1.5s infinite; }
+    @keyframes nudge { 50% { transform: translateY(5px); } }
+
+    section.content-section { padding: 95px 0; position: relative; }
+    .section-heading { margin-bottom: 38px; }
+    .section-heading .eyebrow { margin-bottom: 8px; }
+    .section-heading h2 { font-size: clamp(30px, 4vw, 43px); letter-spacing: -1px; line-height: 1.2; }
+    .section-heading h2 span { color: var(--gold); }
+    .section-heading p { color: var(--muted); max-width: 670px; margin-top: 12px; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: stretch; }
+    .glass-card {
+      border: 1px solid var(--border); border-radius: 20px; padding: 27px;
+      background: linear-gradient(145deg, rgba(18,40,75,.78), rgba(8,21,44,.78));
+      box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .glass-card::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); }
+    .glass-card h3 { font-size: 19px; margin-bottom: 10px; }
+    .glass-card p { color: var(--muted); font-size: 14px; }
+    .profile-details { display: grid; gap: 15px; margin-top: 22px; }
+    .detail-row { display: flex; gap: 12px; align-items: flex-start; color: #dce7fb; font-size: 13px; }
+    .detail-icon { flex: 0 0 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; color: var(--gold); background: rgba(255,200,87,.1); }
+    .detail-row small { display: block; color: #8198bc; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .skill-card { padding: 20px; border-radius: 16px; border: 1px solid var(--border); background: rgba(9,25,51,.72); transition: transform .25s, border-color .25s; }
+    .skill-card:hover { transform: translateY(-5px); border-color: rgba(255,200,87,.65); }
+    .skill-icon { font-size: 25px; margin-bottom: 8px; }
+    .skill-card h3 { font-size: 15px; margin-bottom: 5px; }
+    .skill-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    .skills-band { background: linear-gradient(90deg, rgba(23,54,99,.26), rgba(11,29,57,.55), rgba(23,54,99,.26)); border-block: 1px solid rgba(110,164,255,.12); }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .tag { padding: 8px 12px; border: 1px solid rgba(88,166,255,.3); border-radius: 10px; background: rgba(88,166,255,.07); color: #d9e7ff; font-size: 12px; }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { padding: 0; overflow: hidden; }
+    .project-art {
+      height: 155px; display: grid; place-items: center; font-size: 42px; position: relative; overflow: hidden;
+      background: radial-gradient(circle at 30% 30%, rgba(72,224,255,.24), transparent 45%), linear-gradient(135deg, #142f58, #10172e);
+      border-bottom: 1px solid var(--border);
+    }
+    .project-art::after { content: ""; position: absolute; width: 200%; height: 1px; background: rgba(88,166,255,.4); transform: rotate(-28deg); box-shadow: 0 0 25px var(--blue); }
+    .project-body { padding: 22px; }
+    .project-body h3 { font-size: 17px; margin-bottom: 8px; }
+    .project-body p { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .project-label { display: inline-block; color: var(--gold); font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; font-weight: 800; }
+
+    .experience-grid { display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: start; }
+    .experience-date { border: 1px solid rgba(255,200,87,.42); border-radius: 15px; text-align: center; padding: 15px 8px; color: var(--gold); font-weight: 800; font-size: 13px; background: rgba(255,200,87,.06); }
+    .experience-date small { display: block; color: var(--muted); font-weight: 500; font-size: 10px; }
+    .experience-content h3 { font-size: 21px; }
+    .experience-content h4 { color: var(--cyan); font-size: 14px; margin: 3px 0 12px; }
+    .experience-content p, .experience-content li { color: var(--muted); font-size: 14px; }
+    .experience-content ul { padding-left: 20px; margin-top: 12px; columns: 2; }
+    .experience-content li { break-inside: avoid; margin-bottom: 6px; }
+
+    .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .cert-card { display: flex; gap: 16px; align-items: flex-start; }
+    .cert-symbol { flex: 0 0 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: rgba(255,200,87,.1); color: var(--gold); font-size: 23px; }
+    .cert-card h3 { font-size: 16px; }
+    .cert-card p { color: var(--muted); font-size: 13px; }
+
+    .contact-panel {
+      display: grid; grid-template-columns: 1fr auto; gap: 25px; align-items: center;
+      border: 1px solid rgba(88,166,255,.38); border-radius: 24px; padding: clamp(25px, 5vw, 48px);
+      background: radial-gradient(circle at 100% 0%, rgba(88,166,255,.17), transparent 45%), linear-gradient(135deg, rgba(17,43,81,.85), rgba(7,18,38,.9));
+      box-shadow: var(--shadow);
+    }
+    .contact-panel h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; margin-bottom: 12px; }
+    .contact-panel h2 span { color: var(--gold); }
+    .contact-panel p { color: var(--muted); max-width: 650px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .contact-note { font-size: 12px; color: #8ca4c8; margin-top: 12px; }
+    footer { padding: 25px 20px; text-align: center; border-top: 1px solid rgba(110,164,255,.13); color: #8298ba; font-size: 12px; }
+    footer strong { color: #dbe7ff; }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .back-top {
+      position: fixed; right: 22px; bottom: 22px; z-index: 500; width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center; text-decoration: none; color: #101b31; background: var(--gold);
+      box-shadow: 0 7px 24px rgba(255,200,87,.25); opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: .25s;
+    }
+    .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+    @media (max-width: 980px) {
+      .nav-shell { padding-inline: 16px; }
+      .nav-links { gap: 0; }
+      .nav-links a { padding: 9px 8px; font-size: 12px; }
+      .nav-links a .nav-icon { display: none; }
+      .hero-grid { gap: 25px; }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .site-header { top: 10px; padding-inline: 10px; }
+      .nav-shell { min-height: 66px; border-radius: 18px; }
+      .brand-mark { width: 39px; height: 39px; }
+      .menu-toggle { display: inline-grid; place-items: center; z-index: 3; }
+      .nav-links {
+        display: none; position: absolute; top: calc(100% + 9px); left: 0; right: 0; padding: 12px;
+        border: 1px solid var(--border); border-radius: 18px; background: rgba(5,16,37,.97);
+        backdrop-filter: blur(18px); box-shadow: var(--shadow); flex-direction: column; align-items: stretch;
+      }
+      .nav-links.open { display: flex; animation: menuIn .2s ease-out; }
+      @keyframes menuIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+      .nav-links a { justify-content: flex-start; padding: 12px; font-size: 14px; }
+      .nav-links a .nav-icon { display: inline; }
+      .nav-links a::after { left: 12px; right: auto; width: 30px; }
+      .hero { padding-top: 135px; padding-bottom: 75px; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero .eyebrow { justify-content: center; }
+      .hero-description { margin-inline: auto; }
+      .hero-actions, .quick-facts { justify-content: center; }
+      .visual-wrap { min-height: 340px; grid-row: 1; }
+      .orbit { width: min(260px, 65vw); }
+      .chip-one { right: 1%; }
+      .chip-two { left: 1%; }
+      .scroll-hint { display: none; }
+      section.content-section { padding: 70px 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .experience-grid { grid-template-columns: 1fr; gap: 14px; }
+      .experience-date { width: 145px; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .brand-name { font-size: 14px; }
+      .brand-sub { font-size: 8px; letter-spacing: 2px; }
+      h1 { letter-spacing: -1.5px; }
+      .hero h2 { font-size: 17px; }
+      .typed-line { font-size: 15px; }
+      .quick-facts { gap: 14px; }
+      .fact strong { font-size: 17px; }
+      .skills-grid, .project-grid, .cert-grid { grid-template-columns: 1fr; }
+      .experience-content ul { columns: 1; }
+      .glass-card { padding: 22px; }
+      .floating-chip { font-size: 10px; padding: 8px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#home" aria-label="Daryl Dajao home">
+        <span class="brand-mark">D</span>
+        <span class="brand-name">Daryl A. Dajao<span class="brand-sub">BSIT PORTFOLIO</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a class="active" href="#home"><span class="nav-icon">⌂</span> Home</a></li>
+          <li><a href="#about"><span class="nav-icon">◉</span> About</a></li>
+          <li><a href="#skills"><span class="nav-icon">⚙</span> Skills</a></li>
+          <li><a href="#projects"><span class="nav-icon">⌘</span> Projects</a></li>
+          <li><a href="#ojt"><span class="nav-icon">▤</span> OJT</a></li>
+          <li><a href="#awards"><span class="nav-icon">☆</span> Certificates</a></li>
+          <li><a href="#contact"><span class="nav-icon">✉</span> Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Welcome to my portfolio</div>
+          <h1>Daryl A.<br><span class="gradient-name">Dajao</span></h1>
+          <h2>Bachelor of Science in Information Technology</h2>
+          <p class="typed-line">I am an <span id="typedText">IT Support Enthusiast</span><span class="cursor">|</span></p>
+          <p class="hero-description">
+            A motivated BSIT graduate with hands-on OJT experience in computer troubleshooting,
+            technical support, software installation, and basic networking. I enjoy solving problems,
+            learning new technologies, and helping people use technology confidently.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore My Work <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#contact">✉ Contact Me</a>
+          </div>
+          <div class="quick-facts">
+            <div class="fact"><strong>486 Hours</strong><span>IT OJT Experience</span></div>
+            <div class="fact"><strong>BSIT</strong><span>College Graduate</span></div>
+            <div class="fact"><strong>Always Learning</strong><span>Growth Mindset</span></div>
+          </div>
+        </div>
+        <div class="visual-wrap" aria-label="Decorative portfolio graphic">
+          <div class="orbit">
+            <div class="profile-placeholder">
+              <div><div class="initials">DA</div><small>IT • SUPPORT • CREATE</small></div>
+            </div>
+          </div>
+          <div class="floating-chip chip-one"><b>✦</b> Problem Solver</div>
+          <div class="floating-chip chip-two"><b>⌘</b> Tech-minded & dependable</div>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll to explore <span>↓</span></div>
+    </section>
+
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">A little about me</div>
+          <h2>Turning curiosity into <span>solutions.</span></h2>
+          <p>I value reliability, continuous learning, and clear communication. My goal is to contribute to a team while continuing to grow as an IT professional.</p>
+        </div>
+        <div class="about-grid">
+          <article class="glass-card reveal">
+            <h3>My professional profile</h3>
+            <p>I am a Bachelor of Science in Information Technology graduate from Northern Bukidnon State College. During my training, I gained practical exposure to IT equipment maintenance, troubleshooting, and day-to-day technical assistance.</p>
+            <div class="profile-details">
+              <div class="detail-row"><span class="detail-icon">⌖</span><div><small>Education</small>Northern Bukidnon State College</div></div>
+              <div class="detail-row"><span class="detail-icon">⌘</span><div><small>Career interests</small>IT Support · Technical Support · ICT Operations</div></div>
+              <div class="detail-row"><span class="detail-icon">✓</span><div><small>Work approach</small>Responsible, adaptable, detail-oriented</div></div>
+            </div>
+          </article>
+          <div class="skills-grid">
+            <article class="skill-card reveal"><div class="skill-icon">💻</div><h3>Computer Support</h3><p>Diagnosing common PC, laptop, printer, and software issues.</p></article>
+            <article class="skill-card reveal"><div class="skill-icon">🌐</div><h3>Basic Networking</h3><p>Basic network troubleshooting and connectivity checks.</p></article>
+            <article class="skill-card reveal"><div class="skill-icon">🧰</div><h3>System Setup</h3><p>OS, drivers, and application installation and configuration.</p></article>
+            <article class="skill-card reveal"><div class="skill-icon">🤝</div><h3>People Skills</h3><p>Teamwork, communication, patience, and willingness to learn.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section skills-band" id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Tools & capabilities</div>
+          <h2>Skills I bring to the <span>team.</span></h2>
+          <p>A practical foundation in IT operations, paired with the flexibility to learn your organization's systems and processes.</p>
+        </div>
+        <div class="tech-tags reveal">
+          <span class="tag">PC & Laptop Troubleshooting</span><span class="tag">Hardware / Software Installation</span>
+          <span class="tag">Basic Networking</span><span class="tag">Microsoft Office</span>
+          <span class="tag">Data Encoding</span><span class="tag">Documentation</span>
+          <span class="tag">AnyDesk Remote Support</span><span class="tag">Basic Database Concepts</span>
+          <span class="tag">CCTV Setup Assistance</span><span class="tag">Team Collaboration</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Selected work</div>
+          <h2>Projects & <span>learning.</span></h2>
+          <p>Use this section to show recruiters what you have built, what tools you used, and what you learned. Replace or expand these cards with your real screenshots and project links.</p>
+        </div>
+        <div class="project-grid">
+          <article class="glass-card project-card reveal">
+            <div class="project-art">📱</div>
+            <div class="project-body"><span class="project-label">Capstone / Mobile App</span><h3>MAHN Learning Tool</h3><p>A mobile learning concept focused on Mobile Application Hardware and Networking as an alternative learning tool for first- and second-year BSIT students.</p><span class="tag">Mobile Learning</span></div>
+          </article>
+          <article class="glass-card project-card reveal">
+            <div class="project-art">🌐</div>
+            <div class="project-body"><span class="project-label">Web Development</span><h3>Website & Database Projects</h3><p>Showcase your web pages, forms, database integration, or school systems. Add screenshots and a live demo or source-code link when available.</p><span class="tag">HTML · CSS · JavaScript</span></div>
+          </article>
+          <article class="glass-card project-card reveal">
+            <div class="project-art">🎮</div>
+            <div class="project-body"><span class="project-label">Creative Technology</span><h3>Unity / Game Development</h3><p>Present a game prototype, interactive scene, or animation. Explain your role, tools used, and the challenge you solved.</p><span class="tag">Unity · Interactive Media</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section skills-band" id="ojt">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Professional experience</div>
+          <h2>Learning through <span>hands-on work.</span></h2>
+        </div>
+        <div class="glass-card experience-grid reveal">
+          <div class="experience-date">486 HOURS<small>Feb – May 2026</small></div>
+          <div class="experience-content">
+            <h3>Technical Support Trainee</h3>
+            <h4>Information and Communication Technology Management Office (ICTMO)</h4>
+            <p><strong>Northern Bukidnon State College (NBSC)</strong> · Manolo Fortich, Bukidnon</p>
+            <p>Completed 486 hours of On-the-Job Training, gaining practical exposure to technical support, IT equipment maintenance, and troubleshooting in a professional office environment.</p>
+            <ul>
+              <li>Assisted with PC, laptop, and printer troubleshooting.</li>
+              <li>Supported OS, application, and driver installation.</li>
+              <li>Helped diagnose basic network and connectivity issues.</li>
+              <li>Assisted with equipment setup and maintenance.</li>
+              <li>Provided basic user support and remote assistance.</li>
+              <li>Helped with data encoding and IT-related documentation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="awards">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Professional development</div>
+          <h2>Certificates & <span>recognition.</span></h2>
+          <p>Only list certificates and awards you have actually earned. Add the certificate title, issuing organization, date, and a link or image if appropriate.</p>
+        </div>
+        <div class="cert-grid">
+          <article class="glass-card cert-card reveal"><div class="cert-symbol">📜</div><div><h3>Training Certificates</h3><p>Add your completed online courses, seminars, and technical training here, including the provider and completion date.</p></div></article>
+          <article class="glass-card cert-card reveal"><div class="cert-symbol">🏆</div><div><h3>Awards & Achievements</h3><p>Add academic recognition, competition results, or other verified achievements. If you have none to list yet, you can remove this card.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <div class="eyebrow">Let's connect</div>
+            <h2>Ready to contribute.<br><span>Ready to keep learning.</span></h2>
+            <p>I welcome opportunities in IT support, technical support, ICT operations, and related entry-level roles. Thank you for taking the time to review my portfolio.</p>
+            <div class="contact-links">
+              <!-- Replace the email below if your preferred contact address changes. -->
+              <a class="btn btn-primary" href="mailto:daryldajao2026@gmail.com">✉ Email Me</a>
+              <button class="btn btn-outline" id="copyEmail" type="button">Copy Email</button>
+            </div>
+            <p class="contact-note" id="copyStatus" aria-live="polite">Email: daryldajao2026@gmail.com</p>
+          </div>
+          <div class="brand-mark" style="width:88px;height:88px;border-radius:25px;font-size:42px;">D</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> <strong>Daryl A. Dajao</strong> · BSIT Portfolio · Built with curiosity and code.</p>
+  </footer>
+  <a class="back-top" id="backTop" href="#home" aria-label="Back to top">↑</a>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // Typewriter effect
+    const typedText = document.getElementById('typedText');
+    const phrases = ['IT Support Enthusiast', 'Technical Support Trainee', 'Problem Solver', 'Lifelong Learner'];
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+    function typeLoop() {
+      const phrase = phrases[phraseIndex];
+      typedText.textContent = phrase.slice(0, charIndex);
+      if (!deleting && charIndex < phrase.length) {
+        charIndex++; setTimeout(typeLoop, 75);
+      } else if (!deleting) {
+        deleting = true; setTimeout(typeLoop, 1300);
+      } else if (charIndex > 0) {
+        charIndex--; setTimeout(typeLoop, 35);
+      } else {
+        deleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; setTimeout(typeLoop, 250);
+      }
+    }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) typeLoop();
+
+    // Reveal content as it enters the viewport
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Active nav item and back-to-top button
+    const sections = document.querySelectorAll('main section[id]');
+    const navItems = document.querySelectorAll('.nav-links a');
+    const backTop = document.getElementById('backTop');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+    sections.forEach(section => sectionObserver.observe(section));
+    window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500), { passive: true });
+
+    // Copy email button
+    document.getElementById('copyEmail').addEventListener('click', async () => {
+      const email = 'daryldajao2026@gmail.com';
+      const status = document.getElementById('copyStatus');
+      try {
+        await navigator.clipboard.writeText(email);
+        status.textContent = 'Email copied to clipboard: ' + email;
+      } catch {
+        status.textContent = 'Please copy this email manually: ' + email;
+      }
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
